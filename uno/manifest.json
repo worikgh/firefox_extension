@@ -1,13 +1,17 @@
 {
   "manifest_version": 2,
-  "name": "Uno Addon",
+    "name": "Uno Addon: Call rust function",
   "version": "1.0",
-  "description": "The first addon for examining and manipulating the web page",
+    "description": "The first addon for examining and manipulating the web page, and a webassembly component",
   "content_scripts": [
     {
       "matches": ["*://*/*"],
       "js": ["content-script.js"]
     }
   ],
-    "permissions": ["activeTab", "tabs"]
+    "permissions": ["activeTab", "tabs"],
+    "web_accessible_resources": [
+	"rust_wasm_module.js",
+	"rust_wasm_module_bg.wasm"
+    ]
 }

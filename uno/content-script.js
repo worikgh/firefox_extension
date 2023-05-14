@@ -51,22 +51,25 @@ document.body.insertBefore(heading, document.body.firstChild);
 // the following `()` will immediately invoke that function
 // expression. It means, as soon as the function is defined, it is
 // called and executed.
-// (async () => {
-//     console.log("uno: Start main function of plugin: 1");
-//     // Import the wasm module and its initialization function
-//     const rustWasmModule = await import("./rust_wasm_module.js");
-//     console.log("uno: Imported rustWasmModule");
+(async () => {
+    console.log("uno: Start main function of plugin: 1");
+    // Import the wasm module and its initialization function
+    const moduleURL = browser.runtime.getURL("rust_wasm_module.js");
+    console.log(`Got moduleURL: ${moduleURL}`);
+    const rustWasmModule = await import(moduleURL);
 
-//     // Initialize and instantiate the wasm module
-//     const wasm = await rustWasmModule.default();
-//     console.log("uno: Here 1");
-//     // Call the Rust function 'add' from the wasm module
-//     const a = 42;
-//     const b = 13;
-//     const result = wasm.add(a, b);
-//     // Log the result to the console
-//     console.log(`${a} + ${b} = ${result}`); // Should log: "42 + 13 = 55"
-// })();
+    console.log("uno: Imported rustWasmModule");
+
+    // Initialize and instantiate the wasm module
+    const wasm = await rustWasmModule.default();
+    console.log("uno: Here 1");
+    // Call the Rust function 'add' from the wasm module
+    const a = 42;
+    const b = 13;
+    const result = wasm.add(a, b);
+    // Log the result to the console
+    console.log(`${a} + ${b} = ${result}`); // Should log: "42 + 13 = 55"
+})();
 
 
 

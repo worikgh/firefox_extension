@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "name": "Uno Addon",
+  "version": "1.0",
+  "description": "The first addon for examining and manipulating the web page",
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["content-script.js"]
+    }
+  ],
+    "permissions": ["activeTab", "tabs"]
+}

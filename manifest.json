@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+    "name": "Call rust functions in Firefox Addon.  Eventually",
+  "version": "1.0",
+    "description": "The first addon for examining and manipulating the web page, and a webassembly component",
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["content-script.js"]
+    }
+  ],
+    "permissions": ["activeTab", "tabs"],
+    "web_accessible_resources": [
+	"wasm_link_color.js",
+	"wasm_link_color_bg.wasm"
+    ]
+}

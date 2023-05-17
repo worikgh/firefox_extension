@@ -1,7 +1,3 @@
-
-// Log the page title
-console.log("Page title:", document.title);
-
 // Find all the paragraphs on the web page
 const paragraphs = document.querySelectorAll('p');
 console.log(`There are ${paragraphs.length} paragraphs on this page.`);
@@ -16,6 +12,13 @@ for (const link of links) {
 const heading = document.createElement('h1');
 heading.innerText = 'Injected by the content script';
 document.body.insertBefore(heading, document.body.firstChild);
+
+WebAssembly.instantiateStreaming(fetch(browser.runtime.getURL("wasm_link_color_bg.wasm")), {})
+.then(results => {
+    console.log("wasm returned", results.instance.exports.add(41, 3));
+}).catch((err) => {
+  console.error("Unable to instantiateStreaming", err)
+});
 
 // In JavaScript, the pattern `(async () => { <code> })()` is an
 // immediately invoked function expression (IIFE) that is used to
@@ -53,18 +56,6 @@ document.body.insertBefore(heading, document.body.firstChild);
 // expression. It means, as soon as the function is defined, it is
 // called and executed.
 
-// (async function() {
-//     const module = await import(browser.runtime.getURL('wasm_link_color.js'));
-//     const { init, add } = module;
-//     // await initSync(module); // Call the init function before using the exported functions
-//   // Now you can use the add function, e.g., console.log(add(2, 3));
-//     console.log("Loaded wasm");
-//     const a = 42;
-//     const b = 13;
-//     // const result = add(a, b);
-//     // Log the result to the console
-//     console.log(`${a} + ${b} = ${result}`); // Should log: "42 + 13 = 55"
-// })();
 
 
 
